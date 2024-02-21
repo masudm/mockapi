@@ -5,6 +5,7 @@ const port = 3000;
 const zlib = require("zlib");
 const http = require("http");
 const crypto = require("crypto");
+const fs = require("fs");
 
 const router = express.Router();
 
@@ -345,6 +346,15 @@ router.get("/image", (req, res) => {
   res.sendFile(file, {
     root: "./public/images",
   });
+});
+
+router.get("/image64", (req, res) => {
+  var imageAsBase64 = fs.readFileSync("./public/images/pig_icon.png", "base64");
+  res.writeHead(200, {
+    "Content-Type": "image/png",
+    "Content-Length": imageAsBase64.length,
+  });
+  res.end(`data:image/${"png"};base64,${imageAsBase64}`);
 });
 
 router.get("/image/png", (req, res) => {
