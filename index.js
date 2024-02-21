@@ -354,7 +354,7 @@ router.get("/image64", (req, res) => {
     "Content-Type": "image/png",
     "Content-Length": imageAsBase64.length,
   });
-  res.end(`data:image/${"png"};base64,${imageAsBase64}`);
+  res.end(imageAsBase64);
 });
 
 router.get("/image/png", (req, res) => {
