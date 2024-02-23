@@ -353,6 +353,7 @@ router.get("/image64", (req, res) => {
   res.writeHead(200, {
     "Content-Type": "image/png",
     "Content-Length": imageAsBase64.length,
+    isBase64Encoded: true,
   });
   res.end(imageAsBase64);
 });
@@ -388,6 +389,23 @@ router.get("/image/svg", (req, res) => {
 router.get("/xml", (req, res) => {
   res.setHeader(constants.HTTPHeaderContentType, mime.types.xml);
   res.sendFile("sample.xml", {
+    root: "./public",
+  });
+});
+
+router.get("/csv", (req, res) => {
+  res.setHeader(constants.HTTPHeaderContentType, mime.types.csv);
+  res.sendFile("cities.csv", {
+    root: "./public",
+  });
+});
+
+router.get("/excel", (req, res) => {
+  res.setHeader(
+    constants.HTTPHeaderContentType,
+    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+  );
+  res.sendFile("excel.xlsx", {
     root: "./public",
   });
 });
